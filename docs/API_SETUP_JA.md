@@ -11,7 +11,7 @@ Releases のAPK（0.3.0〜、シリーズ共通鍵）の署名SHA-1:
 0.2.1までの試作鍵（パッケージ `com.theta.navihatch`、SHA-1 `28:C2:74:EE:…:B6:CA`）の登録は、旧APKを消したら外してよい。
 
 API制限にはNavigation SDK for Androidを含める。
-2026-11-24 の設定（キー名「Theta Navi」）：Navigation SDK・Places API (New) を許可。プロジェクトで有効な Maps の API はこの 2 つだけ。Geocoding・Routes・Route Optimization・Roads・Weather は、使う機能を作るときにライブラリで有効にしてからキーに足す。アプリ制限は Android（`app.thetahatch.navi`＋共通鍵 SHA-1）。
+2026-11-24 の設定（キー名「Theta Navi」）：Navigation SDK・Places API (New)・Roads API・Geocoding API・Routes API・Route Optimization API・Weather API の 7 つを有効にし、キーにも許可済み。ほかの API を使うときは、ライブラリで有効にしてからキーに足す。アプリ制限は Android（`app.thetahatch.navi`＋共通鍵 SHA-1）。
 Placesを同じキーで呼ぶ場合はPlaces API（New）も有効化し、API制限にも含める。
 内部共有等で署名が変われば、その証明書のSHA-1を追加する。自作の別鍵で再署名した場合も同様。
 
