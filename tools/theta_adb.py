@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Theta.Navi.Hatch debug APK helper. Python 3 stdlib + Android platform-tools."""
 import argparse, datetime, json, pathlib, re, shlex, subprocess, sys, time
-PKG='com.theta.navihatch'
+PKG='app.thetahatch.navi'
 def main():
  p=argparse.ArgumentParser(description=__doc__)
  p.add_argument('--serial',required=True,help='Exact adb device serial, e.g. 100.x.y.z:5555')

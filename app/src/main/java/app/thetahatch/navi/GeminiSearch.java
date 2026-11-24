@@ -1,4 +1,4 @@
-package com.theta.navihatch;
+package app.thetahatch.navi;
 import org.json.*;
 import java.net.*;
 import java.io.*;
@@ -37,7 +37,7 @@ public final class GeminiSearch {
  private static JSONObject http(String endpoint,String method,String key,JSONObject body,String mask,String certificate)throws Exception{
   HttpURLConnection c=(HttpURLConnection)new URL(endpoint).openConnection();c.setConnectTimeout(20000);c.setReadTimeout(60000);c.setRequestMethod(method);c.setInstanceFollowRedirects(false);c.setRequestProperty("x-goog-api-key",key);c.setRequestProperty("Accept","application/json");
   if(mask!=null)c.setRequestProperty("X-Goog-FieldMask",mask);
-  if(certificate!=null){c.setRequestProperty("X-Android-Package","com.theta.navihatch");c.setRequestProperty("X-Android-Cert",certificate);}
+  if(certificate!=null){c.setRequestProperty("X-Android-Package","app.thetahatch.navi");c.setRequestProperty("X-Android-Cert",certificate);}
   try{if(body!=null){c.setDoOutput(true);c.setRequestProperty("Content-Type","application/json; charset=utf-8");try(OutputStream o=c.getOutputStream()){o.write(body.toString().getBytes(StandardCharsets.UTF_8));}}
    int status=c.getResponseCode();InputStream input=status>=200&&status<300?c.getInputStream():c.getErrorStream();ByteArrayOutputStream bytes=new ByteArrayOutputStream();if(input!=null)try(InputStream in=input){byte[] b=new byte[8192];int n;while((n=in.read(b))!=-1){if(bytes.size()+n>2097152)throw new IOException("応答が大きすぎます");bytes.write(b,0,n);}}
    if(status<200||status>=300)throw new IOException("HTTP "+status+"：APIキー・対象APIの有効化・課金・モデル名・利用制限を確認してください");

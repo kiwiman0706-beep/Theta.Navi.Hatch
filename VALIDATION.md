@@ -45,3 +45,9 @@ CarPlay送信実装の研究資料、公開APK/ソース、iPlay60 Pro/SIM/無�
 Thetaのアプリソース・APK・署名鍵は元ZIPから変更なし。既存25テストは0.2.1時点の結果を保存したもので、今回再ビルド・実車試験を実施したという意味ではない。
 元ファイル61件の欠落なし。新規Pythonの構文/CLIヘルプ、JSON、上流ソースZIPのCRCを確認。公開APKの取得ハッシュはresearch/CONTENTS_AND_CHECKS.jsonを参照。Shizukuは配布側の独立ハッシュ未取得、第三者APK署名検査/端末実行は未実施。
 最終ZIPのCRCとMANIFEST_SHA256は梱包時に検査。tools/verify_bundle.pyで展開後に再検査可能。
+
+## 0.3.0（2026-11-24、シリーズに合わせた版）
+- アプリ ID `app.thetahatch.navi`・versionCode 4。中身の機能は 0.2.1 と同じ。「更新を確認」（ハブへ UPDATE）を追加
+- クラウドの Linux（JDK21・Android SDK 36）で `assembleDebug assembleRelease testDebugUnitTest lintDebug` 成功。25 テスト合格（失敗 0）。release は鍵なしのため未署名
+- 共通鍵での署名・Release 作成は GitHub Actions（release.yml）でまだ一度も通していない
+- 実機・実車・有効なキーでの確認は 0.2.1 と同じく未確認

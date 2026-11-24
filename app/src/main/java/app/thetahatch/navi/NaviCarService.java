@@ -1,4 +1,4 @@
-package com.theta.navihatch;
+package app.thetahatch.navi;
 import android.content.Intent;
 import androidx.annotation.NonNull;
 import androidx.car.app.*;

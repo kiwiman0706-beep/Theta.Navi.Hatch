@@ -1,0 +1,58 @@
+# 版（app/build.gradle の versionName）を上げて main に push すると、v<版> のタグと Release を作る。
+# シリーズ共通仕様 §6.1：draft・prerelease にしない、APK は 1 つ、共通鍵で署名。
+name: release
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: '17' }
+      - uses: gradle/actions/setup-gradle@v4
+      - name: 版を読む
+        id: ver
+        run: |
+          v=$(sed -n "s/.*versionName '\(.*\)'.*/\1/p" app/build.gradle)
+          echo "version=$v" >> "$GITHUB_OUTPUT"
+          if git ls-remote --exit-code --tags origin "refs/tags/v$v" >/dev/null; then echo "exists=true" >> "$GITHUB_OUTPUT"; else echo "exists=false" >> "$GITHUB_OUTPUT"; fi
+      - name: テスト
+        run: ./gradlew --no-daemon :app:testDebugUnitTest :app:lintDebug
+      - name: 鍵を置く
+        if: steps.ver.outputs.exists == 'false'
+        env:
+          KS: ${{ secrets.ANDROID_KEYSTORE_B64 }}
+        run: |
+          test -n "$KS" || { echo "Secret ANDROID_KEYSTORE_B64 がありません"; exit 1; }
+          echo "$KS" | base64 -d > "$RUNNER_TEMP/theta.jks"
+          echo "ANDROID_KEYSTORE_FILE=$RUNNER_TEMP/theta.jks" >> "$GITHUB_ENV"
+      - name: ビルド
+        if: steps.ver.outputs.exists == 'false'
+        env:
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: ./gradlew --no-daemon :app:assembleRelease
+      - name: 署名を確かめる
+        if: steps.ver.outputs.exists == 'false'
+        run: |
+          v=${{ steps.ver.outputs.version }}
+          out=ThetaNaviHatch-$v.apk
+          cp app/build/outputs/apk/release/app-release.apk "$out"
+          bt=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
+          "$bt/apksigner" verify --print-certs "$out" | tee sig.txt
+          grep -qi "SHA-256 digest: f47740d8549bc1c37feb00b18780d80b52758b60252ba0d2217d83ab3f012a23" sig.txt || { echo "共通鍵で署名されていません"; exit 1; }
+          sha256sum "$out" > SHA256SUMS
+          echo "APK=$out" >> "$GITHUB_ENV"
+      - name: Release を作る
+        if: steps.ver.outputs.exists == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          v=${{ steps.ver.outputs.version }}
+          gh release create "v$v" "$APK" SHA256SUMS --title "Theta Navi Hatch $v" --notes-file <(sed -n "/^## $v/,/^## /p" CHANGELOG.md | sed '$d')

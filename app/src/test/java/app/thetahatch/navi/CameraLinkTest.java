@@ -1,4 +1,4 @@
-package com.theta.navihatch;
+package app.thetahatch.navi;
 import org.junit.Test;import static org.junit.Assert.*;
 public class CameraLinkTest {
  private CameraState pose(){return new CameraState(35.681,139.767,17,42,30);}

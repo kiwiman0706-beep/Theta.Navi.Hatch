@@ -3,10 +3,12 @@
 ## 1. Navigation SDK（実地図）
 
 Google Cloudでプロジェクトを選び、課金設定を紐付け、Navigation SDK for Androidを有効にしてキーを作成。
-アプリ制限はAndroidアプリ、パッケージ名は `com.theta.navihatch`。
-同梱APKの署名SHA-1:
+アプリ制限はAndroidアプリ、パッケージ名は `app.thetahatch.navi`。
+Releases のAPK（0.3.0〜、シリーズ共通鍵）の署名SHA-1:
 
-`28:C2:74:EE:AF:FA:43:90:E3:F3:D8:F3:A1:B9:39:3E:51:FD:B6:CA`
+`A1:13:EA:34:83:60:56:32:E7:F5:94:4E:4E:8C:20:55:DD:AE:28:BA`
+
+0.2.1までの試作鍵（パッケージ `com.theta.navihatch`、SHA-1 `28:C2:74:EE:…:B6:CA`）の登録は、旧APKを消したら外してよい。
 
 API制限にはNavigation SDK for Androidを含める。Placesを同じキーで呼ぶ場合はPlaces API（New）も有効化し、API制限にも含める。
 内部共有等で署名が変われば、その証明書のSHA-1を追加する。自作の別鍵で再署名した場合も同様。
@@ -45,4 +47,4 @@ https://developers.google.com/maps/api-security-best-practices
 この配布物には実際のキーはない。チャットへ貼り付ける必要もない。
 端末入力後に一度プロセスが起動したSDKキーは変更できないため、変更後は手動でプロセスを再起動。
 キー削除後も起動中SDKは古いキーをメモリに保持するので、削除を完了させる場合も再起動。
-`adb shell am force-stop com.theta.navihatch` は車載地図も終了させるため、停車中かつ切断してから行う。
+`adb shell am force-stop app.thetahatch.navi` は車載地図も終了させるため、停車中かつ切断してから行う。

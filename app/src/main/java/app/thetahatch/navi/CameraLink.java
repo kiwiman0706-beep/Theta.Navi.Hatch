@@ -1,4 +1,4 @@
-package com.theta.navihatch;
+package app.thetahatch.navi;
 
 /** Copies camera values only; never transfers or destroys a map View. */
 public final class CameraLink {

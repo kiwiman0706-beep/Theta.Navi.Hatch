@@ -1,18 +1,23 @@
 plugins { id 'com.android.application' }
 android {
- namespace 'com.theta.navihatch'
+ namespace 'app.thetahatch.navi'
  compileSdk 36
  defaultConfig {
-  applicationId 'com.theta.navihatch'
+  applicationId 'app.thetahatch.navi'
   minSdk 26
   targetSdk 36
-  versionCode 3
-  versionName '0.2.1-vehicle-probe'
+  versionCode 4
+  versionName '0.3.0'
  }
- signingConfigs { testKey { storeFile file('../test-signing.jks'); storePassword 'theta-test-only'; keyAlias 'theta-test'; keyPassword 'theta-test-only' } }
+ // シリーズ共通鍵（Theta.Hatch.Series の secrets/README.md）。CI は Secret 4 つ、手元は同じ名前の環境変数。
+ // 鍵が無いときの release は未署名（debug は Android の既定の debug 鍵）。
+ def ks = System.getenv('ANDROID_KEYSTORE_FILE')
+ signingConfigs {
+  if (ks) { theta { storeFile file(ks); storePassword System.getenv('ANDROID_KEYSTORE_PASSWORD'); keyAlias System.getenv('ANDROID_KEY_ALIAS') ?: 'thetahatch'; keyPassword System.getenv('ANDROID_KEY_PASSWORD') } }
+ }
  buildTypes {
-  debug { signingConfig signingConfigs.testKey }
-  release { signingConfig signingConfigs.testKey; minifyEnabled false }
+  // P0 実車検証の間は tools/theta_adb.py が run-as でログを回収するので debuggable にしておく（製品版で外す）
+  release { if (ks) signingConfig signingConfigs.theta; minifyEnabled false; debuggable true }
  }
  compileOptions { coreLibraryDesugaringEnabled true; sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
  buildFeatures { buildConfig true }

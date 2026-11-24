@@ -1,4 +1,30 @@
-# Theta.Navi.Hatch 0.2.1 — 引き継ぎ
+# Theta.Navi.Hatch
+
+## Theta Hatch シリーズ共通（必ず参照）
+
+このアプリは Theta Hatch シリーズの 1 つです。シリーズ共通の仕様・デザイン・鍵の決まりは
+GitHub の kiwiman0706-beep/Theta.Hatch.Series にあり、このリポジトリの docs より優先します。
+
+- 作業を始める前に、Theta.Hatch.Series を読める状態にする
+  （クラウドのスレッドでは add_repo で kiwiman0706-beep/Theta.Hatch.Series を追加して clone する）
+- 読むもの：
+  - `spec/THETA_HATCH_SPEC.md`（共通仕様）、`spec/THETA_VAULT_SPEC.md`、`spec/THETA_SHARED_SETTINGS.md`、`spec/THETA_GOOGLE_SETUP.md`
+  - `design/README.md`（スキン：system・dark・light・pop・alert・scifi。色は `design/skins/skins.json`）
+  - `spec/THETA_HATCH_SPEC.md` §6.1（アプリ内自動更新は必須）、`docs/MIGRATION.md`・`catalog/apps.json`（このアプリの目標の ID・リポジトリ名）
+  - `secrets/README.md`（署名鍵はシリーズ共通。Secret の名前は ANDROID_KEYSTORE_B64・ANDROID_KEYSTORE_PASSWORD・ANDROID_KEY_ALIAS・ANDROID_KEY_PASSWORD）
+- 共通仕様の写しをこのリポジトリに増やさない（変えるときは Theta.Hatch.Series 側を直す）
+- 鍵・パスワード・API キーをリポジトリに入れない
+- 移行や大きな変更の方針と進み具合は、Theta.Hatch.Series の `progress/<id>.md` に書く（書き方は `progress/_TEMPLATE.md`。自分のアプリのファイルだけを触る）
+- 作品の版や概要が変わったら、Theta.Hatch.Series の README の一覧も直す
+
+## このリポジトリ
+
+- アプリ ID `app.thetahatch.navi`（0.3.0〜）。0.2.1 までは `com.theta.navihatch`＋試作鍵（Git には入れていない）
+- 版は `app/build.gradle` の versionName。上げて main に push すると `release.yml` が `v<版>` の Release を作る。CHANGELOG.md に同じ版の節を書く
+- 引き継ぎ ZIP（handoff-r2）の `research/binaries`・`research/upstream`（第三者の APK・ソース ZIP）は Git に入れていない。要るときは利用者の手元の ZIP から
+- Theta.Home.Hatch への内蔵／連動の構想は `docs/HOME_LINK_JA.md`
+
+## 0.2.1 の引き継ぎ（元の文）
 
 README_JA.md、VALIDATION.md、docs/API_SETUP_JA.md、docs/TEST_MATRIX_JA.md、docs/ROADMAP_JA.md、docs/VEHICLE_LOCATION_PROBE_JA.mdを最初に読む。
 ユーザーはCX-8の非タッチ車載画面とジョグダイヤルを地図に特化し、タブレット側を操作パネル・マルチタッチ地図として使いたい。
@@ -39,7 +65,7 @@ Googleの一部サンプルの空ActionStripをそのままコピーすると実
 
 JDK17 / Gradle8.13 / AGP8.13.2 / compile,target36 / min26 / NavSDK7.9.0 / CAL1.7.0。
 `./gradlew :app:assembleDebug :app:testDebugUnitTest :app:lintDebug`
-更新はversionCodeを増やし、試作用の同梱署名鍵を維持。公開製品には別の署名とAPIキー配信・バックエンド等を検討。
+更新はversionCodeとversionNameを上げる。署名はシリーズ共通鍵（0.3.0〜）。公開製品にはAPIキー配信・バックエンド等を検討。
 キーを再設定した場合、SDKのプロセス再起動が必要。車載接続中に自動でforce-stopしない。
 
 ## 0.2.1 車両位置診断

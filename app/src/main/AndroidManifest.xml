@@ -5,8 +5,13 @@
  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+ <queries>
+  <package android:name="app.thetahatch.home"/>
+  <package android:name="app.thetahatch.kidshome"/>
+  <intent><action android:name="android.intent.action.VIEW"/><data android:scheme="https"/></intent>
+ </queries>
  <uses-feature android:glEsVersion="0x00020000" android:required="true"/>
- <application android:name=".NaviApp" android:label="Theta.Navi.Hatch" android:icon="@drawable/ic_launcher" android:theme="@style/AppTheme" android:allowBackup="false" android:fullBackupContent="false" android:usesCleartextTraffic="false" android:dataExtractionRules="@xml/data_extraction_rules" android:supportsRtl="true">
+ <application android:name=".NaviApp" android:label="Theta Navi Hatch" android:icon="@drawable/ic_launcher" android:theme="@style/AppTheme" android:allowBackup="false" android:fullBackupContent="false" android:usesCleartextTraffic="false" android:dataExtractionRules="@xml/data_extraction_rules" android:supportsRtl="true">
   <meta-data android:name="com.google.android.gms.car.application" android:resource="@xml/automotive_app_desc"/>
   <meta-data android:name="androidx.car.app.minCarApiLevel" android:value="2"/>
   <activity android:name=".MainActivity" android:exported="true" android:configChanges="orientation|screenSize">
@@ -16,7 +21,7 @@
    <intent-filter><action android:name="androidx.car.app.CarAppService"/><category android:name="androidx.car.app.category.NAVIGATION"/></intent-filter>
   </service>
   <receiver android:name=".TestReceiver" android:exported="true" android:permission="android.permission.DUMP">
-   <intent-filter><action android:name="com.theta.navihatch.TEST"/></intent-filter>
+   <intent-filter><action android:name="app.thetahatch.navi.TEST"/></intent-filter>
   </receiver>
  </application>
 </manifest>

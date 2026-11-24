@@ -1,4 +1,4 @@
-package com.theta.navihatch;
+package app.thetahatch.navi;
 import org.junit.*;import static org.junit.Assert.*;import org.junit.runner.RunWith;
 import org.robolectric.*;import org.robolectric.annotation.GraphicsMode;import org.robolectric.annotation.Config;
 import android.content.Intent;import android.graphics.*;

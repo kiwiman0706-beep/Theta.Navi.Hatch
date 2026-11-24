@@ -1,4 +1,4 @@
-package com.theta.navihatch;
+package app.thetahatch.navi;
 
 /** A camera pose, independent of SDK/View lifecycles. */
 public final class CameraState {

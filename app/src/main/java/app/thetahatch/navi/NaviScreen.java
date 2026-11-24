@@ -1,4 +1,4 @@
-package com.theta.navihatch;
+package app.thetahatch.navi;
 import android.app.Presentation;
 import android.content.Context;
 import android.graphics.*;

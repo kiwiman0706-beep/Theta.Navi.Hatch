@@ -25,7 +25,7 @@ def main():
         report['screen']={k:run('shell','wm',k) for k in ('size','density')}
         report['settings']={k:run('shell','settings','get','global',k) for k in ('mobile_data','adb_enabled','adb_wifi_enabled')}
         report['packages']={}
-        for package in ('com.theta.navihatch','io.github.shaonialife.cardeck','moe.shizuku.privileged.api','com.tailscale.ipn','com.google.android.gms'):
+        for package in ('app.thetahatch.navi','io.github.shaonialife.cardeck','moe.shizuku.privileged.api','com.tailscale.ipn','com.google.android.gms'):
             r=run('shell','dumpsys','package',package)
             lines=[l.strip() for l in r.get('stdout','').splitlines() if re.search(r'\b(versionCode=|versionName=|minSdk=|targetSdk=)',l)]
             report['packages'][package]={'exit_code':r.get('exit_code'),'version_lines':lines,'note':'No version lines means absent, restricted or unparsed; check manually.' if not lines else ''}

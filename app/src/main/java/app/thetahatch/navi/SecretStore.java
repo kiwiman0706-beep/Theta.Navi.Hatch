@@ -1,4 +1,4 @@
-package com.theta.navihatch;
+package app.thetahatch.navi;
 import android.content.Context;
 import android.util.Base64;
 import android.security.keystore.KeyGenParameterSpec;

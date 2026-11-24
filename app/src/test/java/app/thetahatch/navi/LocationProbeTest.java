@@ -1,4 +1,4 @@
-package com.theta.navihatch;
+package app.thetahatch.navi;
 import android.location.Location;
 import androidx.car.app.hardware.common.CarValue;
 import org.junit.*;

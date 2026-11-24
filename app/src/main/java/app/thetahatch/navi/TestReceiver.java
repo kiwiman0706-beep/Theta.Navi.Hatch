@@ -1,4 +1,4 @@
-package com.theta.navihatch;
+package app.thetahatch.navi;
 import android.content.*;
 public class TestReceiver extends BroadcastReceiver {
  @Override public void onReceive(Context context,Intent intent){

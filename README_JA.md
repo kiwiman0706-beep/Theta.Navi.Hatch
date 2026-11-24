@@ -112,7 +112,7 @@ SDK7.9.0を固定し、実行時のキー設定APIとAndroid Auto用Viewを利�
 ```
 
 APK: `app/build/outputs/apk/debug/app-debug.apk`。
-署名は0.1と同じ試作専用 `test-signing.jks`。alias `theta-test`、store/key password `theta-test-only`。本番署名に流用しないこと。
+0.3.0からReleasesのAPKはシリーズ共通鍵で署名（GitHub Actions）。手元のdebugビルドはAndroidの既定debug鍵なので、APIキーのSHA-1が違う点に注意。
 Android 8.0(API26)以上、Google Play services、SDK対応のGPU/メモリが必要です。Android Auto自体の対応条件は別途確認。
 
 ## 診断・秘密情報

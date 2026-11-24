@@ -1,4 +1,4 @@
-package com.theta.navihatch;
+package app.thetahatch.navi;
 import android.Manifest;
 import android.app.*;
 import android.content.*;
@@ -22,7 +22,7 @@ public class MainActivity extends Activity {
  @Override public void onCreate(Bundle b){super.onCreate(b);app=(NaviApp)getApplication();getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
   root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setPadding(dp(14),dp(8),dp(14),dp(8));root.setBackgroundColor(0xff101a23);setContentView(root);
   root.setOnApplyWindowInsetsListener((v,in)->{root.setPadding(dp(14)+in.getSystemWindowInsetLeft(),dp(8)+in.getSystemWindowInsetTop(),dp(14)+in.getSystemWindowInsetRight(),dp(8)+in.getSystemWindowInsetBottom());return in;});
-  root.addView(text("THETA / NAVI HATCH   0.2.1",22,0xff6de3c7));status=text("",12,0xffbfd1dc);root.addView(status);
+  root.addView(text("THETA / NAVI HATCH   "+BuildConfig.VERSION_NAME,22,0xff6de3c7));status=text("",12,0xffbfd1dc);root.addView(status);
   LinearLayout top=new LinearLayout(this);root.addView(top);addRow(top,button("地図を開始","start_sdk",this::startMaps),button("API設定","settings",this::settings),button("地図を広く","wide",()->{wide=!wide;sideScroll.setVisibility(wide?View.GONE:View.VISIBLE);}));
   LinearLayout body=new LinearLayout(this);root.addView(body,new LinearLayout.LayoutParams(-1,0,1));mapBox=new FrameLayout(this);body.addView(mapBox,new LinearLayout.LayoutParams(0,-1,1.5f));mapHint=text("Navigation SDKの実地図を表示します。\nAPI設定 → 地図を開始\n\n模擬地図への自動切替はしません。",18,Color.WHITE);mapBox.addView(mapHint);
   sideScroll=new ScrollView(this);side=new LinearLayout(this);side.setOrientation(LinearLayout.VERTICAL);side.setPadding(dp(12),0,0,0);sideScroll.addView(side);body.addView(sideScroll,new LinearLayout.LayoutParams(0,-1,1));
@@ -41,9 +41,12 @@ public class MainActivity extends Activity {
   side.addView(button("車両位置情報の診断 ON/OFF","vehicle_probe",this::toggleVehicleProbe));probeStatus=text("",12,0xffbfd1dc);side.addView(probeStatus);
   side.addView(button("接続パネルの模擬 ON/OFF","simulate_connection",()->{if(app.testMode)cmd("connect",app.simulatedConnection?0:1,0,"");else message("先にテストモードをONにしてください");}));
   side.addView(button("ログに目印","mark",()->cmd("mark",1,0,"MANUAL_CHECK")));side.addView(button("SDK地図の画像を保存","snapshot",()->cmd("snapshot",1,0,"")));
-  side.addView(button("ライセンス・表示について","licenses",this::licenses));
+  side.addView(button("更新を確認","update",this::requestUpdate));side.addView(button("ライセンス・表示について","licenses",this::licenses));
   app.listeners.add(update);refresh();app.event("tablet_lifecycle","created","");
  }
+ /** 更新はハブ（Home・KidsHome）に頼む。ハブが無ければ Releases を開く（シリーズ共通仕様 §6.1）。 */
+ private void requestUpdate(){for(String hub:new String[]{"app.thetahatch.home","app.thetahatch.kidshome"}){Intent i=new Intent("app.thetahatch.action.UPDATE").setPackage(hub).putExtra("packageName",getPackageName());if(i.resolveActivity(getPackageManager())!=null){try{startActivity(i);return;}catch(Exception ignored){}}}
+  try{startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("https://github.com/kiwiman0706-beep/Theta.Navi.Hatch/releases/latest")));}catch(Exception e){message("Releasesページを開けませんでした");}}
  private void toggleVehicleProbe(){if(app.vehicleProbe.enabled){cmd("vehicle_probe",0,0,"");return;}if(!app.testMode){message("先にテストモードをONにしてください。診断中は位置座標を端末内ログへ保存します。");return;}if(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)!=PackageManager.PERMISSION_GRANTED){requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},22);return;}cmd("vehicle_probe",1,0,"");}
  private void startMaps(){if(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)!=PackageManager.PERMISSION_GRANTED){requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},21);return;}app.initialize(this);}
  @Override public void onRequestPermissionsResult(int r,String[] p,int[] g){super.onRequestPermissionsResult(r,p,g);if(r==22){if(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED)cmd("vehicle_probe",1,0,"");else message("車両位置診断には正確な位置情報の許可が必要です。");}if(r==21){if(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED)app.initialize(this);else message("Navigation SDKの初期化には位置情報の許可が必要です。設定で確認してください。");}}

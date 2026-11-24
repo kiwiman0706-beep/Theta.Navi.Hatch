@@ -1,4 +1,4 @@
-package com.theta.navihatch;
+package app.thetahatch.navi;
 import android.graphics.*;
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.*;
