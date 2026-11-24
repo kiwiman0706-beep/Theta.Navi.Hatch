@@ -17,7 +17,10 @@ Theta.Navi.Hatch（https://github.com/kiwiman0706-beep/Theta.Navi.Hatch）の P0
 ## 手順
 1. 端末の情報を読むだけで集める（Android の版、機種、Google Play 開発者サービスの版、Android Auto の版、SIM の通信状態、空き容量）。root・OS の書き換え・設定の変更はしない
 2. https://github.com/kiwiman0706-beep/Theta.Navi.Hatch/releases/latest の ThetaNaviHatch-<版>.apk を取得し、SHA256SUMS と照合してから入れる（`python tools/theta_adb.py --serial <serial> install <apk>`）。署名の違いで入らなくても、勝手にアンインストールしない
-3. API キーは私がタブレットの「API設定」で入力する。チャット・コマンド・ログにキーを出さない
+3. API キー（Navigation SDK 用）は作業フォルダの APIKEY.txt にある。中身を表示・echo・ログ・チャットに出さない。コミットしない（.gitignore 済み。git status に出たら止まって私に言う）
+   入れ方：タブレットで Navi の「API設定」を開き、Navigation SDK の欄にフォーカスを合わせてから、
+   `adb -s <serial> push APIKEY.txt /data/local/tmp/k` → `adb -s <serial> shell 'input text "$(cat /data/local/tmp/k)"; rm /data/local/tmp/k'`
+   （PC のコマンド引数にキーを載せない）。保存したら Navi を一度閉じて開き直す（キーは起動時だけ読む）。画面の操作が難しければ私が貼る
 4. `cmd enable` → `status` → `smoke` → `capture --out captures/p0-<日付>`。smoke は画面・操作の確認だけで、実地図が出た証明ではない
 5. 地図が出たら、タブレットの画面を私が見て確認。Android Auto への出し方（Play の内部共有か、Android Auto の開発者設定の「提供元不明のアプリ」か）を調べて、私に選ばせる
 6. 車での確認（二画面・ジョグダイヤル・車両位置の診断 vehiclecheck）は私が停車中にやる。ADB の入力をダイヤルの成功と扱わない。写真・動画は私が撮って渡す

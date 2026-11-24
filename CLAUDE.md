@@ -53,6 +53,7 @@ Googleの一部サンプルの空ActionStripをそのままコピーすると実
 
 - adb serialを必ず明示。ユーザーPCのTailscale/ADB認証を確認する。
 - APIキーは端末設定画面で入力。チャット/シェル引数/ログへ出さない。設定ダイアログはFLAG_SECURE。
+- 手元の作業フォルダの APIKEY.txt（Git 対象外）からADBで入れてよい。手順は docs/PROMPT_LOCAL_P0_JA.md の 3。中身は表示しない。
 - test modeをenableし、status→smoke→capture。smokeはUI/制御だけで、実地図表示の証明ではない。
 - 実地図が車・タブレット双方で表示されたらdualcheckとTEST_MATRIXを実施。
 - map_loadedはSDKコールバックの到達であり、実車画面のピクセルやGoogle API課金設定の全面的な正常性を証明しない。
