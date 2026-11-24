@@ -1,0 +1,57 @@
+[
+  {
+    "file": "research/binaries/Pi2Carplay-v0.2.0-codec-sources.tar.gz",
+    "sha256": "2e294b6e5bbdab8c58ec0ed87e04d236488dd944a414a32dc45bd38d0d36ddba",
+    "bytes": 2103284,
+    "upstream_digest": "sha256:2e294b6e5bbdab8c58ec0ed87e04d236488dd944a414a32dc45bd38d0d36ddba",
+    "digest_status": "MATCH",
+    "source_url": "https://github.com/Fotsbeats/Pi2Carplay/releases/download/v0.2.0/Pi2Carplay-v0.2.0-codec-sources.tar.gz",
+    "release_tag": "v0.2.0",
+    "signature_verification": "NOT_RUN",
+    "runtime_verification": "NOT_RUN"
+  },
+  {
+    "file": "research/binaries/SHA256SUMS",
+    "sha256": "6917b9f68988e8b231e2fdab7b3bbb3b00e2a9af9a8d531639b2f0f83b76eede",
+    "bytes": 718,
+    "upstream_digest": "sha256:6917b9f68988e8b231e2fdab7b3bbb3b00e2a9af9a8d531639b2f0f83b76eede",
+    "digest_status": "MATCH",
+    "source_url": "https://github.com/Fotsbeats/Pi2Carplay/releases/download/v0.2.0/SHA256SUMS",
+    "release_tag": "v0.2.0",
+    "signature_verification": "NOT_RUN",
+    "runtime_verification": "NOT_RUN"
+  },
+  {
+    "file": "research/binaries/CarDeck-0.1.30.apk",
+    "sha256": "8d6e0224d9988ecfe3882c154f1abc52ecf658712bde7306e39769590ca5a5d8",
+    "bytes": 9555805,
+    "upstream_digest": "sha256:8d6e0224d9988ecfe3882c154f1abc52ecf658712bde7306e39769590ca5a5d8",
+    "digest_status": "MATCH_RELEASE_NOTES_AND_DIGEST",
+    "source_url": "https://github.com/shaonialife/cardeck/releases/download/v0.1.30/CarDeck-0.1.30.apk",
+    "release_tag": "v0.1.30",
+    "signature_verification": "NOT_RUN",
+    "runtime_verification": "NOT_RUN"
+  },
+  {
+    "file": "research/binaries/shizuku-v13.6.0.r1086.2650830c-release.apk",
+    "sha256": "6e273ab0e991c4e79bc8b1bbb9b9dd739ccac1a8712a541a214078886b7b790f",
+    "bytes": 2571773,
+    "upstream_digest": null,
+    "digest_status": "UPSTREAM_DIGEST_UNAVAILABLE",
+    "source_url": "https://github.com/RikkaApps/Shizuku/releases/download/v13.6.0/shizuku-v13.6.0.r1086.2650830c-release.apk",
+    "release_tag": "v13.6.0",
+    "signature_verification": "NOT_RUN",
+    "runtime_verification": "NOT_RUN"
+  },
+  {
+    "file": "research/binaries/CarPToCarL-1.2.85.apk",
+    "sha256": "da57c34962d90de4916e710db0e1fa9698a043bc08f914ae8cd20128c90a1ff3",
+    "bytes": 13524605,
+    "upstream_digest": "sha256:da57c34962d90de4916e710db0e1fa9698a043bc08f914ae8cd20128c90a1ff3",
+    "digest_status": "MATCH",
+    "source_url": "https://github.com/jjuugk/CarPToCarL/releases/download/v1.2.85/CarPToCarL-1.2.85.apk",
+    "release_tag": "v1.2.85",
+    "signature_verification": "NOT_RUN",
+    "runtime_verification": "NOT_RUN"
+  }
+]

@@ -1,0 +1,22 @@
+{
+  "baseline_original_files": 61,
+  "unchanged_original_files": 55,
+  "changed_original_files": [
+    "Theta.Navi.Hatch/CLAUDE.md",
+    "Theta.Navi.Hatch/README_JA.md",
+    "Theta.Navi.Hatch/THIRD_PARTY.md",
+    "Theta.Navi.Hatch/docs/ROADMAP_JA.md",
+    "Theta.Navi.Hatch/docs/START_WITH_CLAUDE_JA.txt",
+    "Theta.Navi.Hatch/VALIDATION.md"
+  ],
+  "missing_original_files": [],
+  "theta_apk_sha256": "d65699927689b368e6643f9cd02584f1e08cf848effc25b05e6afe0fbae64013",
+  "theta_apk_unchanged": true,
+  "application_code_changed": false,
+  "third_party_runtime_test": "NOT_RUN",
+  "cx8_test": "NOT_RUN",
+  "python_syntax": "PASS",
+  "json_parse": "PASS",
+  "upstream_source_zip_crc": "PASS",
+  "signature_verification_third_party": "NOT_RUN"
+}

@@ -1,0 +1,121 @@
+[
+  {
+    "repository": "shaonialife/cardeck",
+    "retrieved_at_utc": "2026-11-24T08:55:44Z",
+    "files": [
+      {
+        "path": "upstream/cardeck/releases-latest.json",
+        "url": "https://api.github.com/repos/shaonialife/cardeck/releases/latest",
+        "bytes": 5328,
+        "sha256": "6db6bdcc6b6c9acd099e7efa6a65f5029485bc0cf09f078ad7ac1d5cb1d6c098",
+        "included_at_recorded_path": true
+      },
+      {
+        "path": "binaries/CarDeck-0.1.30.apk",
+        "url": "https://github.com/shaonialife/cardeck/releases/download/v0.1.30/CarDeck-0.1.30.apk",
+        "bytes": 9555805,
+        "sha256": "8d6e0224d9988ecfe3882c154f1abc52ecf658712bde7306e39769590ca5a5d8",
+        "included_at_recorded_path": true
+      },
+      {
+        "path": "upstream/cardeck/commits-main.json",
+        "url": "https://api.github.com/repos/shaonialife/cardeck/commits/main",
+        "bytes": 4520,
+        "sha256": "50ce29c9e977c620143ca18753d8d007685e43b532e41b99bdd50f94d8f757a5",
+        "included_at_recorded_path": true
+      },
+      {
+        "path": "upstream/cardeck/cardeck-a8ce7887cd15.zip",
+        "url": "https://codeload.github.com/shaonialife/cardeck/zip/a8ce7887cd15f085c0a01d7852cf0751ffa1e4cc",
+        "bytes": 2011877,
+        "sha256": "2d7943876958913241e1b19528c765d832bbb4efba120ce27b4204e2ff3ae15f",
+        "included_at_recorded_path": true
+      }
+    ],
+    "errors": [],
+    "release": "v0.1.30",
+    "commit": "a8ce7887cd15f085c0a01d7852cf0751ffa1e4cc"
+  },
+  {
+    "repository": "jjuugk/CarPToCarL",
+    "retrieved_at_utc": "2026-11-24T08:55:44Z",
+    "files": [
+      {
+        "path": "upstream/CarPToCarL/releases-latest.json",
+        "url": "https://api.github.com/repos/jjuugk/CarPToCarL/releases/latest",
+        "bytes": 6719,
+        "sha256": "b06a571a79ef629be177687eaa9397523b26259801cf54f95042e9e0a6ecb8d4",
+        "included_at_recorded_path": true
+      },
+      {
+        "path": "binaries/CarPToCarL-1.2.85.apk",
+        "url": "https://github.com/jjuugk/CarPToCarL/releases/download/v1.2.85/CarPToCarL-1.2.85.apk",
+        "bytes": 13524605,
+        "sha256": "da57c34962d90de4916e710db0e1fa9698a043bc08f914ae8cd20128c90a1ff3",
+        "included_at_recorded_path": true
+      },
+      {
+        "path": "upstream/CarPToCarL/commits-main.json",
+        "url": "https://api.github.com/repos/jjuugk/CarPToCarL/commits/main",
+        "bytes": 8647,
+        "sha256": "2355eb96f4418af1f6a788b217773c670cf0ddd5a0c2094bda5656aaace8be69",
+        "included_at_recorded_path": true
+      },
+      {
+        "path": "upstream/CarPToCarL/CarPToCarL-35f9ddff50a3.zip",
+        "url": "https://codeload.github.com/jjuugk/CarPToCarL/zip/35f9ddff50a33b348364386de3693d9a24b82f06",
+        "bytes": 1936502,
+        "sha256": "8679e414fb1c97956c3c00ae7fcc3cf7da77ae64d514062bfb4e2c5f176dfe42",
+        "included_at_recorded_path": true
+      }
+    ],
+    "errors": [],
+    "release": "v1.2.85",
+    "commit": "35f9ddff50a33b348364386de3693d9a24b82f06"
+  },
+  {
+    "repository": "Fotsbeats/Pi2Carplay",
+    "retrieved_at_utc": "2026-11-24T08:55:44Z",
+    "files": [
+      {
+        "path": "upstream/Pi2Carplay/releases-latest.json",
+        "url": "https://api.github.com/repos/Fotsbeats/Pi2Carplay/releases/latest",
+        "bytes": 10990,
+        "sha256": "7db64b1c065fc20f31952bd18c712c6f1aa66533d67199ee8459f80f8e4c2bbc",
+        "included_at_recorded_path": true
+      },
+      {
+        "path": "binaries/Pi2Carplay-v0.2.0-codec-sources.tar.gz",
+        "url": "https://github.com/Fotsbeats/Pi2Carplay/releases/download/v0.2.0/Pi2Carplay-v0.2.0-codec-sources.tar.gz",
+        "bytes": 2103284,
+        "sha256": "2e294b6e5bbdab8c58ec0ed87e04d236488dd944a414a32dc45bd38d0d36ddba",
+        "included_at_recorded_path": true
+      },
+      {
+        "path": "binaries/SHA256SUMS",
+        "url": "https://github.com/Fotsbeats/Pi2Carplay/releases/download/v0.2.0/SHA256SUMS",
+        "bytes": 718,
+        "sha256": "6917b9f68988e8b231e2fdab7b3bbb3b00e2a9af9a8d531639b2f0f83b76eede",
+        "included_at_recorded_path": true
+      },
+      {
+        "path": "upstream/Pi2Carplay/commits-main.json",
+        "url": "https://api.github.com/repos/Fotsbeats/Pi2Carplay/commits/main",
+        "bytes": 22033,
+        "sha256": "fd8c7fbd99bfea8658137a14b6763c135a1c9704d140b25b6759ebd99b71aa5e",
+        "included_at_recorded_path": true
+      },
+      {
+        "path": "upstream/Pi2Carplay/Pi2Carplay-36b0a11fb252.zip",
+        "url": "https://codeload.github.com/Fotsbeats/Pi2Carplay/zip/36b0a11fb2526b8c8353527f75cdfa46439836f6",
+        "bytes": 316203521,
+        "sha256": "320eaa3e10dc1f22bd6dacb03e72a41f9024973a1aca69ef26c309181c47eac8",
+        "included_at_recorded_path": false,
+        "omission_reason": "Full Pi Linux kernel archive omitted; selected-source contains non-kernel project files. Fetch optional original by pinned URL/hash."
+      }
+    ],
+    "errors": [],
+    "release": "v0.2.0",
+    "commit": "36b0a11fb2526b8c8353527f75cdfa46439836f6"
+  }
+]

@@ -1,0 +1,67 @@
+/workspace/scratch/2b6d5c73793d/roadmap-work/Theta.Navi.Hatch/app/src/main/java/com/theta/navihatch/SecretStore.java:15: Warning: Consider using apply() instead; commit writes its data to persistent storage immediately, whereas apply will handle it in the background [ApplySharedPref]
+ public void write(String name,String value) throws Exception {if(!value.isEmpty()&&!value.matches("[A-Za-z0-9_-]{20,200}"))throw new IllegalArgumentException("API key format is invalid");if(value.isEmpty()){context.getSharedPreferences("encrypted_keys",0).edit().remove(name).commit();return;}Cipher c=Cipher.getInstance("AES/GCM/NoPadding");c.init(Cipher.ENCRYPT_MODE,key());String data=Base64.encodeToString(c.getIV(),2)+":"+Base64.encodeToString(c.doFinal(value.getBytes(java.nio.charset.StandardCharsets.UTF_8)),2);if(!context.getSharedPreferences("encrypted_keys",0).edit().putString(name,data).commit())throw new java.io.IOException("Key save failed");}
+                                                                                                                                                                                                                                                                                     ~~~~~~~~
+
+   Explanation for issues of type "ApplySharedPref":
+   Consider using apply() instead of commit on shared preferences. Whereas
+   commit blocks and writes its data to persistent storage immediately, apply
+   will handle it in the background.
+
+/workspace/scratch/2b6d5c73793d/roadmap-work/Theta.Navi.Hatch/app/build.gradle:30: Warning: A newer version of org.robolectric:robolectric than 4.14.1 is available: 4.18.1 [NewerVersionAvailable]
+ testImplementation 'org.robolectric:robolectric:4.14.1'
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "NewerVersionAvailable":
+   This detector checks with a central repository to see if there are newer
+   versions available for the dependencies used by this project. This is
+   similar to the GradleDependency check, which checks for newer versions
+   available in the Android SDK tools and libraries, but this works with any
+   MavenCentral dependency, and connects to the library every time, which
+   makes it more flexible but also much slower.
+
+/workspace/scratch/2b6d5c73793d/roadmap-work/Theta.Navi.Hatch/app/src/main/java/com/theta/navihatch/NaviCarService.java:9: Warning: The resource @array/hosts_allowlist_sample is marked as private in androidx.car.app:app:1.7.0 [PrivateResource]
+  return new HostValidator.Builder(this).addAllowedHosts(androidx.car.app.R.array.hosts_allowlist_sample).build();
+                                                                                  ~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "PrivateResource":
+   Private resources should not be referenced; the may not be present
+   everywhere, and even where they are they may disappear without notice.
+
+   To fix this, copy the resource into your own project instead.
+
+/workspace/scratch/2b6d5c73793d/roadmap-work/Theta.Navi.Hatch/app/src/main/AndroidManifest.xml:15: Warning: Exported service does not require permission [ExportedService]
+  <service android:name=".NaviCarService" android:exported="true">
+   ~~~~~~~
+
+   Explanation for issues of type "ExportedService":
+   Exported services (services which either set exported=true or contain an
+   intent-filter and do not specify exported=false) should define a permission
+   that an entity must have in order to launch the service or bind to it.
+   Without this, any application can use this service.
+
+   https://goo.gle/ExportedService
+
+/workspace/scratch/2b6d5c73793d/roadmap-work/Theta.Navi.Hatch/app/src/main/java/com/theta/navihatch/MainActivity.java:52: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+  status.setText(app.sdkStatus+"\n車:"+(app.connection==2?"接続":"未接続")+"  SDK地図 車:"+app.maps.carLoaded+" / タブレット:"+app.maps.tabletLoaded+"  テスト:"+app.testMode+"\n"+app.lastEvent);
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/scratch/2b6d5c73793d/roadmap-work/Theta.Navi.Hatch/app/src/main/java/com/theta/navihatch/MainActivity.java:52: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+  status.setText(app.sdkStatus+"\n車:"+(app.connection==2?"接続":"未接続")+"  SDK地図 車:"+app.maps.carLoaded+" / タブレット:"+app.maps.tabletLoaded+"  テスト:"+app.testMode+"\n"+app.lastEvent);
+                                                                     ~~~~~~~~~~~~
+/workspace/scratch/2b6d5c73793d/roadmap-work/Theta.Navi.Hatch/app/src/main/java/com/theta/navihatch/MainActivity.java:55: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+  sync.setText(app.cameras.linked?"同期中：両方の地図が動く（切替）":"独立：タブレットだけ動く（切替）");variant.setText("車のボタン："+(app.variant.equals("minimal")?"最少：PAN・＋":app.variant.equals("full")?"PAN・＋・−・現在地":"PAN・＋・−"));
+                                                                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "SetTextI18n":
+   When calling TextView#setText
+   * Never call Number#toString() to format numbers; it will not handle
+   fraction separators and locale-specific digits properly. Consider using
+   String#format with proper format specifications (%d or %f) instead.
+   * Do not pass a string literal (e.g. "Hello") to display text. Hardcoded
+   text can not be properly translated to other languages. Consider using
+   Android resource strings instead.
+   * Do not build messages by concatenating text chunks. Such messages can not
+   be properly translated.
+
+   https://developer.android.com/guide/topics/resources/localization.html
+
+0 errors, 7 warnings

@@ -1,0 +1,10 @@
+このZIPをPCに展開し、00_START_HERE_JA.md→CLAUDE.mdの順で読んでください。
+車はCX-8の非タッチMazda Connect、有線CarPlayのみ。タブレットはALLDOCUBE iPlay60 Pro（Pad Pro/Mini Proではない）、SIM内蔵です。小型CarPlay無線化アダプターを追加購入する案は許容します。
+Android Autoを本線として維持し、CarDeckによる「タブレットをCarPlay送信側にする」Plan Bも検証してください。
+SIMで地図/Gemini/Tailscale、Wi-FiでCarPlayを併用。自宅PCからTailscale経由ADB、私はスマホからClaudeを操作します。
+まず対象ADB serialと実OSを確認し、未改造CarDeckで接続、原始HID、二画面の順に実測してください。購入済みアダプターの型番/FWがなければ確認してください。
+車は地図中心、回転でズーム・傾倒でパンを目標。タブレットに操作パネルと独立したマルチタッチ地図。同じ場所を開いて閉じても車の地図を維持したいです。
+source ZIPとrelease APKは版が異なる可能性があります。記録されたcommit/tag/ハッシュを確認し、原本と改造版を分けてください。
+SIM内蔵を理由に通信共存成功と決めつけず、CarDeckのプロセスWi-Fi束縛がGoogle/Gemini通信を巻き込まない構成を選んでください。
+APIキーは端末設定画面で私が入力します。root/ROM変更/初期化/無断アンインストールはしないでください。
+案内・音声・ホーム連携・別スマホ着信・車GPSはロードマップを参照。実装済み、作者報告、実車未確認を区別して記録してください。

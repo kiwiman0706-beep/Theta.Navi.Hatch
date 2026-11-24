@@ -1,0 +1,16 @@
+/.gradle/
+/local.properties
+/**/build/
+/captures/
+*.iml
+.idea/
+
+__pycache__/
+secrets.properties
+
+# 鍵・APK・第三者の配布物は入れない
+*.jks
+*.keystore
+*.apk
+research/binaries/
+research/upstream/

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.theta.navihatch.GeminiSearchTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-24T00:00:41.741Z" hostname="e97d3014b2a2" time="1.492">
+  <properties/>
+  <testcase name="untrustedUrisAreNotLaunched" classname="com.theta.navihatch.GeminiSearchTest" time="1.387"/>
+  <testcase name="duplicateSourcesCollapse" classname="com.theta.navihatch.GeminiSearchTest" time="0.035"/>
+  <testcase name="hallucinatedCoordinatesDoNotBecomePins" classname="com.theta.navihatch.GeminiSearchTest" time="0.025"/>
+  <testcase name="centerIsOptional" classname="com.theta.navihatch.GeminiSearchTest" time="0.026"/>
+  <testcase name="groundedSourceBecomesSelectablePlace" classname="com.theta.navihatch.GeminiSearchTest" time="0.019"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

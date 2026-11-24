@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.theta.navihatch.LocationProbeTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-11-24T00:00:43.241Z" hostname="e97d3014b2a2" time="0.342">
+  <properties/>
+  <testcase name="nonFiniteAccuracyIsNullAndMissingFieldsStayNull" classname="com.theta.navihatch.LocationProbeTest" time="0.034"/>
+  <testcase name="oldHostApiIsReportedWithoutCallingHardware" classname="com.theta.navihatch.LocationProbeTest" time="0.12"/>
+  <testcase name="errorClearsPriorLocation" classname="com.theta.navihatch.LocationProbeTest" time="0.027"/>
+  <testcase name="staleAndUnknownTimestampsAreNotRecent" classname="com.theta.navihatch.LocationProbeTest" time="0.018"/>
+  <testcase name="futureCarClockCannotBeCompared" classname="com.theta.navihatch.LocationProbeTest" time="0.018"/>
+  <testcase name="noHostDoesNotFabricateLocationAndDisableStopsProbe" classname="com.theta.navihatch.LocationProbeTest" time="0.066"/>
+  <testcase name="successfulCallbackKeepsMetadataWithoutClaimingOrigin" classname="com.theta.navihatch.LocationProbeTest" time="0.017"/>
+  <testcase name="successWithoutFixAndUnimplementedAreDistinct" classname="com.theta.navihatch.LocationProbeTest" time="0.019"/>
+  <testcase name="staleCarTimestampIsNotFreshDespiteNewCallback" classname="com.theta.navihatch.LocationProbeTest" time="0.021"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,14 @@
+{
+  "pi-full-source": {
+    "filename": "Pi2Carplay-36b0a11fb252.zip",
+    "url": "https://codeload.github.com/Fotsbeats/Pi2Carplay/zip/36b0a11fb2526b8c8353527f75cdfa46439836f6",
+    "sha256": "320eaa3e10dc1f22bd6dacb03e72a41f9024973a1aca69ef26c309181c47eac8",
+    "bytes": 316203521
+  },
+  "pi-os-image": {
+    "filename": "Pi2Carplay-v0.2.0-bootfix.img.gz",
+    "url": "https://github.com/Fotsbeats/Pi2Carplay/releases/download/v0.2.0/Pi2Carplay-v0.2.0-bootfix.img.gz",
+    "sha256": "821e454a14a65cc3173a8476297dc4de321b139eefcef0d7eccd467221fe390e",
+    "bytes": 1627880248
+  }
+}

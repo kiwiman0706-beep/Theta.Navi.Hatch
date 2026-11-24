@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.theta.navihatch.AppTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-24T00:00:32.580Z" hostname="e97d3014b2a2" time="9.145">
+  <properties/>
+  <testcase name="tabletClosesWithoutChangingCarState" classname="com.theta.navihatch.AppTest" time="8.429"/>
+  <testcase name="noKeyDoesNotPretendMapIsLoaded" classname="com.theta.navihatch.AppTest" time="0.048"/>
+  <testcase name="carTemplateHasOnlyRequestedActions" classname="com.theta.navihatch.AppTest" time="0.084"/>
+  <testcase name="renderSetupScreen" classname="com.theta.navihatch.AppTest" time="0.521"/>
+  <testcase name="receiverRequiresTestMode" classname="com.theta.navihatch.AppTest" time="0.062"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Invalid ID 0x00000000.
+Invalid ID 0x00000000.
+Intent = Intent { act=theta.test.ordered pkg=com.theta.navihatch (has extras) }; Matching wrappers: [Wrapper[receiver=[com.theta.navihatch.TestReceiver@a157ea7], context=[android.app.ContextImpl@a419552], intentFilter=[android.content.IntentFilter@394b6fbe]]]
+Intent = Intent { act=theta.test.ordered pkg=com.theta.navihatch (has extras) }; Matching wrappers: [Wrapper[receiver=[com.theta.navihatch.TestReceiver@a157ea7], context=[android.app.ContextImpl@a419552], intentFilter=[android.content.IntentFilter@394b6fbe]]]
+]]></system-err>
+</testsuite>

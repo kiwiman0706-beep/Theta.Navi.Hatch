@@ -1,0 +1,17 @@
+Verifies
+Verified using v1 scheme (JAR signing): false
+Verified using v2 scheme (APK Signature Scheme v2): true
+Verified using v3 scheme (APK Signature Scheme v3): false
+Verified using v3.1 scheme (APK Signature Scheme v3.1): false
+Verified using v4 scheme (APK Signature Scheme v4): false
+Verified for SourceStamp: false
+Number of signers: 1
+Signer #1 certificate DN: CN=Theta Navi Hatch TEST ONLY
+Signer #1 certificate SHA-256 digest: be5eef23e7095e4fd73bb130c800a95ad6ff238052cd8d364c75f0cb7ef65db7
+Signer #1 certificate SHA-1 digest: 28c274eeaffa4390e3f3d8f3a1b9393e51fdb6ca
+Signer #1 certificate MD5 digest: 67917f4fb208acab536b766398e45861
+Signer #1 key algorithm: RSA
+Signer #1 key size (bits): 2048
+Signer #1 public key SHA-256 digest: c6fb13b66231e763696e981e4bd1acd7dc8f5e5ad699e0b826c349c78579074c
+Signer #1 public key SHA-1 digest: 721ab9c1ac6dc010f252882270641a6d20dfbfbf
+Signer #1 public key MD5 digest: 63801ea244625c2cda190799200ffaf9
