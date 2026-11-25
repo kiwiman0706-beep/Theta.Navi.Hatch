@@ -43,6 +43,7 @@ public class NaviApp extends Application {
    .put("tablet_open",tabletOpen).put("linked",cameras.linked).put("traffic",traffic).put("variant",variant)
    .put("car_map_ready",maps!=null&&maps.car!=null).put("tablet_map_ready",maps!=null&&maps.tablet!=null).put("car_map_loaded",maps!=null&&maps.carLoaded).put("tablet_map_loaded",maps!=null&&maps.tabletLoaded)
    .put("car_map_generation",carGeneration).put("tablet_map_generation",tabletGeneration).put("car_camera",cameraJson(cameras.car)).put("tablet_camera",cameraJson(cameras.tablet))
+   .put("car_following",maps!=null&&maps.following(true)).put("tablet_following",maps!=null&&maps.following(false)).put("follow_cancelled",maps==null?0:maps.carFollow.cancelled+maps.tabletFollow.cancelled).put("follow_refused",maps==null?0:maps.carFollow.refused+maps.tabletFollow.refused)
    .put("car_scroll_count",carScroll).put("car_scale_count",carScale).put("car_click_count",carClick).put("car_fling_count",carFling).put("seq",seq).put("last_event",lastEvent);
  }catch(JSONException e){throw new IllegalStateException(e);}return j;}
  private JSONObject cameraJson(CameraState c)throws JSONException{return new JSONObject().put("latitude",c.latitude).put("longitude",c.longitude).put("zoom",c.zoom).put("bearing",c.bearing).put("tilt",c.tilt);}
