@@ -51,3 +51,10 @@ Thetaのアプリソース・APK・署名鍵は元ZIPから変更なし。既存
 - クラウドの Linux（JDK21・Android SDK 36）で `assembleDebug assembleRelease testDebugUnitTest lintDebug` 成功。25 テスト合格（失敗 0）。release は鍵なしのため未署名
 - 共通鍵での署名・Release 作成は GitHub Actions（release.yml）でまだ一度も通していない
 - 実機・実車・有効なキーでの確認は 0.2.1 と同じく未確認
+
+## 0.3.1（2026-11-25、P0 実機確認 第1回）
+- iPlay60 Pro（Android 15・Android Auto 18.0）に 0.3.0 を入れ、キー入力後に Navigation SDK の準備完了まで確認。タブレットの実地図の目視はまだ
+- **Android Auto の一覧に出ない（失敗）**：AA 18 は adb で入れた Car App Library のナビアプリを「提供元不明のアプリ」ON でも `CAR.VALIDATOR` で拒否。Play 内部テストで入れる方針
+- そのため release の debuggable を外し、診断は `cmd export` で回収する形に。Release に AAB を添える
+- 手元（Windows）で 25 テスト合格・lint エラー 0・共通鍵で APK／AAB 署名。0.3.1 を実機に入れ smoke・capture が run-as なしで動くことを確認
+- 詳細は docs/p0/RESULT_20261125.md。DHU・実車での地図・二画面・ダイヤル・車両位置は未確認

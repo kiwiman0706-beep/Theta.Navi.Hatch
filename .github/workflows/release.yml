@@ -1,5 +1,6 @@
 # 版（app/build.gradle の versionName）を上げて main に push すると、v<版> のタグと Release を作る。
 # シリーズ共通仕様 §6.1：draft・prerelease にしない、APK は 1 つ、共通鍵で署名。
+# 0.3.1〜 Play 内部テスト用に同じ鍵で署名した AAB も添える（Android Auto はナビの Car App Library アプリを Play 経由の導入でしか一覧に出さないため）。
 name: release
 on:
   push:
@@ -37,7 +38,7 @@ jobs:
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
-        run: ./gradlew --no-daemon :app:assembleRelease
+        run: ./gradlew --no-daemon :app:assembleRelease :app:bundleRelease
       - name: 署名を確かめる
         if: steps.ver.outputs.exists == 'false'
         run: |
@@ -47,12 +48,17 @@ jobs:
           bt=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
           "$bt/apksigner" verify --print-certs "$out" | tee sig.txt
           grep -qi "SHA-256 digest: f47740d8549bc1c37feb00b18780d80b52758b60252ba0d2217d83ab3f012a23" sig.txt || { echo "共通鍵で署名されていません"; exit 1; }
-          sha256sum "$out" > SHA256SUMS
+          aab=ThetaNaviHatch-$v.aab
+          cp app/build/outputs/bundle/release/app-release.aab "$aab"
+          keytool -printcert -jarfile "$aab" | tee aabsig.txt
+          grep -qi "F4:77:40:D8:54:9B:C1:C3:7F:EB:00:B1:87:80:D8:0B:52:75:8B:60:25:2B:A0:D2:21:7D:83:AB:3F:01:2A:23" aabsig.txt || { echo "AAB が共通鍵で署名されていません"; exit 1; }
+          sha256sum "$out" "$aab" > SHA256SUMS
           echo "APK=$out" >> "$GITHUB_ENV"
+          echo "AAB=$aab" >> "$GITHUB_ENV"
       - name: Release を作る
         if: steps.ver.outputs.exists == 'false'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           v=${{ steps.ver.outputs.version }}
-          gh release create "v$v" "$APK" SHA256SUMS --title "Theta Navi Hatch $v" --notes-file <(sed -n "/^## $v/,/^## /p" CHANGELOG.md | sed '$d')
+          gh release create "v$v" "$APK" "$AAB" SHA256SUMS --title "Theta Navi Hatch $v" --notes-file <(sed -n "/^## $v/,/^## /p" CHANGELOG.md | sed '$d')

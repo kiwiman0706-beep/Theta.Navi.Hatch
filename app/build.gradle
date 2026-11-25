@@ -6,8 +6,8 @@ android {
   applicationId 'app.thetahatch.navi'
   minSdk 26
   targetSdk 36
-  versionCode 4
-  versionName '0.3.0'
+  versionCode 5
+  versionName '0.3.1'
  }
  // シリーズ共通鍵（Theta.Hatch.Series の secrets/README.md）。CI は Secret 4 つ、手元は同じ名前の環境変数。
  // 鍵が無いときの release は未署名（debug は Android の既定の debug 鍵）。
@@ -16,8 +16,8 @@ android {
   if (ks) { theta { storeFile file(ks); storePassword System.getenv('ANDROID_KEYSTORE_PASSWORD'); keyAlias System.getenv('ANDROID_KEY_ALIAS') ?: 'thetahatch'; keyPassword System.getenv('ANDROID_KEY_PASSWORD') } }
  }
  buildTypes {
-  // P0 実車検証の間は tools/theta_adb.py が run-as でログを回収するので debuggable にしておく（製品版で外す）
-  release { if (ks) signingConfig signingConfigs.theta; minifyEnabled false; debuggable true }
+  // Play（内部テスト）は debuggable を受け付けないので 0.3.1 から外す。診断ファイルは adb の cmd export で外部の files/export へ書き出して回収する
+  release { if (ks) signingConfig signingConfigs.theta; minifyEnabled false; debuggable false }
  }
  compileOptions { coreLibraryDesugaringEnabled true; sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
  buildFeatures { buildConfig true }

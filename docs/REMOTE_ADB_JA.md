@@ -27,6 +27,10 @@ adb devices -l
 Wi-Fi切替/再起動でワイヤレスデバッグがOFFになったり接続ポートが変わることがあります。
 端末がWi-Fi側アドレスだけで待ち受ける場合、Tailscale IPへの置換では動きません。タイムアウトをアプリの不具合と判断しないこと。
 
+### 携帯回線（SIM）だけで使う（2026-11-25 iPlay60 Pro で確認）
+
+ワイヤレスデバッグは Wi-Fi 接続中でないと ON にできない。車内で SIM 回線だけにするときは、一度 Wi-Fi（スマホのテザリングで可）につないで方法Aで pair・connect し、その接続のまま `adb -s TABLET_TAILSCALE_IP:CONNECT_PORT tcpip 5555` を実行する。Wi-Fi を切っても `adb connect TABLET_TAILSCALE_IP:5555` で Tailscale 越しに使える（再起動で切れる）。iPlay60 Pro・Android 15 ではワイヤレスデバッグの待ち受けが Tailscale のアドレスでも届いた。tailnet の経路は中継（DERP）になることがあり、APK の転送は遅くなる。
+
 ## 方法B: 一度USB認証してADB TCPモード
 
 機種が対応する場合のみ。タブレットをPCにUSB接続して認証し、その接続で実行:
@@ -82,6 +86,8 @@ python tools/theta_adb.py --serial SERIAL capture --out captures/dial-right
 `adb shell input keyevent` はAndroid Auto経由のダイヤル入力を再現するものではありません。
 
 ## Android Autoホストの確認
+
+**Android Auto 18.0 では、adb で入れた（サイドロードした）Car App Library のナビアプリは、AA の開発者設定「提供元不明のアプリ」を ON にしても一覧に出ない**（2026-11-25 iPlay60 Pro で確認。logcat の `CAR.VALIDATOR` に `Package DENIED; failed all other checks [app.thetahatch.navi]`）。メディアアプリ（Movie・Book・Music Hatch）は出る。Play Console の内部テストで入れる。DHU はこの審査を飛ばすので、DHU で出ても実車で出る証拠にならない。
 
 タブレットで起動できても車の一覧に出ないときはREADMEのPlay内部共有/内部テストの項を確認。
 内部共有を利用すると再署名されることがあるため、毎回のADB更新が同一署名で可能か確認してください。

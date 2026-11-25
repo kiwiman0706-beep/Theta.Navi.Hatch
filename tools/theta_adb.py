@@ -9,7 +9,7 @@ def main():
  sub=p.add_subparsers(dest='op',required=True)
  ins=sub.add_parser('install');ins.add_argument('apk')
  sub.add_parser('vehiclecheck');sub.add_parser('status');sub.add_parser('smoke');sub.add_parser('dualcheck')
- cmd=sub.add_parser('cmd');cmd.add_argument('command',choices=['enable','disable','status','vehicle_probe','zoom','pan','home','overview','north','reset','connect','variant','mark','snapshot','open_tablet','close_tablet','link','send_car','goto','traffic']);cmd.add_argument('--a',default='1');cmd.add_argument('--b',default='0');cmd.add_argument('--value',default='')
+ cmd=sub.add_parser('cmd');cmd.add_argument('command',choices=['enable','disable','status','vehicle_probe','zoom','pan','home','overview','north','reset','connect','variant','mark','snapshot','export','export_clear','open_tablet','close_tablet','link','send_car','goto','traffic']);cmd.add_argument('--a',default='1');cmd.add_argument('--b',default='0');cmd.add_argument('--value',default='')
  cap=sub.add_parser('capture');cap.add_argument('--out',default='captures/'+datetime.datetime.now().strftime('%Y%m%d-%H%M%S'))
  a=p.parse_args();base=[a.adb,'-s',a.serial]
  def adb(*args,binary=False,check=True):
@@ -22,8 +22,17 @@ def main():
   if not re.search(r'Broadcast completed: result=0(?:\D|$)',out):raise RuntimeError(out)
   return out
  def state():
-  command('status')
-  return json.loads(adb('exec-out','run-as',PKG,'cat','files/state.json'))
+  # 0.3.1〜 release は debuggable でないので run-as は使えない。状態は TestReceiver の返事（data="..."）から読む
+  out=command('status');m=re.search(r'data="(.*)"\s*$',out.strip(),re.S)
+  if not m:raise RuntimeError('status data missing: '+out[:200])
+  return json.loads(m.group(1))
+ EXPORT='/sdcard/Android/data/'+PKG+'/files/export/'
+ def app_file(name):
+  # debuggable な版（〜0.3.0、debug ビルド）は run-as、そうでなければ cmd export で書き出した写しを読む
+  data=adb('exec-out','run-as',PKG,'cat','files/'+name,binary=True,check=False)
+  if data and not data.startswith((b'cat:',b'run-as:')):return data
+  data=adb('exec-out','cat',EXPORT+name,binary=True,check=False)
+  return b'' if (not data or data.startswith(b'cat:')) else data
  if adb('get-state').strip()!='device':raise RuntimeError('ADB device is not authorized/online')
  if a.op=='install':
   print(adb('install','--no-streaming','-r',str(pathlib.Path(a.apk).resolve())))
@@ -74,9 +83,10 @@ def main():
   out=pathlib.Path(a.out);out.mkdir(parents=True,exist_ok=True)
   current=state();(out/'state.json').write_text(json.dumps(current,ensure_ascii=False,indent=2),encoding='utf-8')
   (out/'tablet-screen.png').write_bytes(adb('exec-out','screencap','-p',binary=True))
+  if current['test_mode']:command('export')
   for name in ['events.jsonl','events.previous.jsonl','vehicle-location.jsonl','vehicle-location.previous.jsonl']:
-   data=adb('exec-out','run-as',PKG,'cat','files/'+name,binary=True,check=False)
-   if data and not data.startswith(b'cat:'):(out/name).write_bytes(data)
+   data=app_file(name)
+   if data:(out/name).write_bytes(data)
   (out/'logcat.txt').write_text(adb('logcat','-d','-v','threadtime','ThetaNavi:I','AndroidRuntime:E','*:S'),encoding='utf-8')
   device={name:shell('getprop',prop).strip() for name,prop in {'manufacturer':'ro.product.manufacturer','model':'ro.product.model','android':'ro.build.version.release','sdk':'ro.build.version.sdk'}.items()}
   package_dump=shell('dumpsys','package','com.google.android.projection.gearhead')
@@ -93,10 +103,10 @@ def main():
     ready=current['car_map_ready'] if name.startswith('car-') else current['tablet_map_ready']
     if not ready:continue
     for attempt in range(20):
-     image=adb('exec-out','run-as',PKG,'cat','files/'+name,binary=True,check=False)
+     time.sleep(.5);command('export');image=app_file(name)
      if image.startswith(b'\x89PNG'):
       (out/name).write_bytes(image);break
-     time.sleep(.5)
+  if current['test_mode']:command('export_clear')
   (out/'README.txt').write_text('tablet-screen.png is the tablet screenshot. car-map-only-NOT-host-UI.png is an SDK snapshot of the car map; it excludes Android Auto bars, buttons, focus, and dashboard. Use a car-screen photo/video or DHU for actual head-unit UI. ADB simulation is not evidence of physical dial input.\n',encoding='utf-8')
   print(str(out.resolve()))
 if __name__=='__main__':

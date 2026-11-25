@@ -12,6 +12,7 @@ secrets.properties
 *.jks
 *.keystore
 *.apk
+*.aab
 research/binaries/
 research/upstream/
 

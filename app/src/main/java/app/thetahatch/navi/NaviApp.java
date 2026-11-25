@@ -53,6 +53,13 @@ public class NaviApp extends Application {
   }catch(Exception e){Log.e("ThetaNavi","Diagnostic write failed");}
   for(Runnable r:new ArrayList<>(listeners))r.run();
  }
+ /** 診断ファイルを外部の files/export へ写す。debuggable でない版でも adb（shell）から読めるように。テストモード中だけ呼ばれる。 */
+ static final String[] EXPORT_FILES={"state.json","events.jsonl","events.previous.jsonl","vehicle-location.jsonl","vehicle-location.previous.jsonl","car-map-only-NOT-host-UI.png","tablet-map-only.png"};
+ public File exportDir(){File base=getExternalFilesDir(null);return base==null?null:new File(base,"export");}
+ public void exportDiagnostics(){saveState();File dir=exportDir();if(dir==null)throw new IllegalStateException("external files dir unavailable");dir.mkdirs();
+  for(String name:EXPORT_FILES){File src=new File(getFilesDir(),name),dst=new File(dir,name);dst.delete();if(!src.isFile())continue;
+   try(java.io.FileInputStream in=new java.io.FileInputStream(src);FileOutputStream out=new FileOutputStream(dst)){byte[] buf=new byte[65536];int n;while((n=in.read(buf))>0)out.write(buf,0,n);}catch(Exception e){Log.e("ThetaNavi","Export failed: "+name);}}}
+ public void clearExport(){File dir=exportDir();if(dir==null)return;File[] files=dir.listFiles();if(files!=null)for(File f:files)f.delete();}
  public void saveState(){try{File f=new File(getFilesDir(),"state.tmp");try(FileOutputStream o=new FileOutputStream(f)){o.write(state().toString(2).getBytes(StandardCharsets.UTF_8));}if(!f.renameTo(new File(getFilesDir(),"state.json")))Log.e("ThetaNavi","State rename failed");}catch(Exception e){Log.e("ThetaNavi","State write failed");}}
  public void command(String source,String cmd,double a,double b,String value){
   if(!Double.isFinite(a)||!Double.isFinite(b))throw new IllegalArgumentException("finite arguments required");
@@ -75,6 +82,8 @@ public class NaviApp extends Application {
    case "goto":maps.moveBoth(new CameraState(a,b,16,0,0));break;
    case "traffic":traffic=a!=0;maps.applyTraffic();break;
    case "snapshot":maps.snapshots();break;
+   case "export":exportDiagnostics();break;
+   case "export_clear":clearExport();break;
    case "mark":case "status":break;
    default:throw new IllegalArgumentException("Unknown command: "+cmd);
   }event(source,cmd,cmd.equals("mark")?value:String.format(Locale.US,"a=%.3f b=%.3f %s",a,b,value));
