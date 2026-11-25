@@ -58,3 +58,4 @@ Thetaのアプリソース・APK・署名鍵は元ZIPから変更なし。既存
 - そのため release の debuggable を外し、診断は `cmd export` で回収する形に。Release に AAB を添える
 - 手元（Windows）で 25 テスト合格・lint エラー 0・共通鍵で APK／AAB 署名。0.3.1 を実機に入れ smoke・capture が run-as なしで動くことを確認
 - 詳細は docs/p0/RESULT_20261125.md。DHU・実車での地図・二画面・ダイヤル・車両位置は未確認
+- 同日夕方：Release の 0.3.1 を入れ、タブレットで Google の実地図を確認（R02 実機SDK）。DHU（PC）では一覧に出て車側にも実地図（R04 DHU 成功、実車は失敗のまま）。dualcheck は開き直しで中心が約 75 m ずれて失敗（R12 DHU）。DHU の一覧のアイコンが白い丸
